@@ -17,12 +17,11 @@ export async function POST(req: Request) {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/success', // Redirect URL after successful payment
+        success_url: '#', // Redirect URL after successful payment
         cancel_url: 'http://localhost:3000/cancel', // Redirect URL after canceled payment
       });
 
-      res.status(200).json({ id: session.id });
-   
+      res.redirect(303, session.url);
 
 
 }
