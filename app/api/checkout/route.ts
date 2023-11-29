@@ -5,11 +5,12 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
-export async function POST(req: Request) {
 
+export async function POST() {
   if (req.method === 'POST') {
 
     try {
+      
       const { lineItems } = req.body;
 
       // Create a new checkout session
@@ -31,3 +32,4 @@ export async function POST(req: Request) {
     res.status(405).end('Method Not Allowed');
   }
 }
+
