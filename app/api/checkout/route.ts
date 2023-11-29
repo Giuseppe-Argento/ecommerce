@@ -1,16 +1,12 @@
-// pages/api/checkout.ts
-//@ts-nocheck
 
-import { NextApiRequest, NextApiResponse } from 'next';
+//@ts-nocheck
 import Stripe from 'stripe';
 
 
 const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function GET(request: Request) {
+
   if (req.method === 'POST') {
     try {
       const { lineItems } = req.body;
