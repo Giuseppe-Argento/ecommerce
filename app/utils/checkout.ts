@@ -12,7 +12,7 @@ export const checkout = async (cart) => {
       quantity: item.quantity,
     }));
 
-    const response = await fetch('/api/checkout', {
+    const response = await fetch('api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
