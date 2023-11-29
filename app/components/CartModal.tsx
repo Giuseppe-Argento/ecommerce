@@ -7,6 +7,9 @@ import Image from 'next/image';
 // Importing hooks from react-redux
 import { useSelector, useDispatch } from 'react-redux';
 import { checkout } from '../utils/checkout';
+import Stripe from 'stripe';
+
+const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
 import {
   incrementQuantity,
@@ -41,11 +44,38 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
     return getTotalPrice() + shippingPrice;
   };
 
-  const handlecheckout = (event) => {
-    event.preventDefault(); // Prevent the default behavior of the event
-    checkout(cart);
-  };
+  const handlecheckout = async (event) => {
 
+  
+    try {
+      // Create a session with line items
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: cart.map(item => ({
+          price: item.id,
+          quantity: item.quantity,
+        })),
+        mode: 'payment',
+        success_url: 'https://your-website.com/success',
+        cancel_url: 'https://your-website.com/cancel',
+      });
+  
+      // Store the session ID in the user's session or handle it as needed
+      // This is a simplified example and may vary based on your server framework
+      // For Express.js, you might use req.session.sessionId = session.id
+      // Make sure to configure your session management appropriately
+      // This data would typically be stored in a database in a real-world scenario
+      const sessionId = session.id;
+  
+      // Redirect the user to the Stripe checkout page
+      // You may want to send the session ID to the client and handle redirection there
+      // For example, window.location.href = session.url;
+      console.log('Redirecting to checkout:', session.url);
+    } catch (error) {
+      console.error('Error creating checkout session:', error.message);
+    }
+  };
+  
 
   return (
     <>
