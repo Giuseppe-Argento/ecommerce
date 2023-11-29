@@ -1,7 +1,9 @@
 //@ts-nocheck
 
+'use client'
+
 // Deatils.tsx
-import React from 'react';
+import { useState } from 'react';
 import { MinusSmallIcon, PlusSmallIcon, SparklesIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 // Importing hooks from react-redux
@@ -44,34 +46,55 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
     return getTotalPrice() + shippingPrice;
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handlecheckout = async (event) => {
 
-  
+
     try {
+      setLoading(true);
       // Create a session with line items
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: cart.map(item => ({
           price: item.id,
+          adjustable_quantity: {
+            enabled: true,
+            minimum: 1,
+            maximum: 10,
+          },
           quantity: item.quantity,
         })),
+        phone_number_collection: {
+          enabled: true,
+        },
+        mode: 'payment',
+        shipping_address_collection: {
+          allowed_countries: ['US', 'IT'],
+        },
+        custom_text: {
+          shipping_address: {
+            message: 'Please note that we can\'t guarantee 2-day delivery for PO boxes at this time.',
+          },
+          submit: {
+            message: 'We\'ll email you instructions on how to get started.',
+          },
+        },
         mode: 'payment',
         success_url: 'https://your-website.com/success',
         cancel_url: 'https://your-website.com/cancel',
       });
 
-  
+
       // Redirect the user to the Stripe checkout page
       // You may want to send the session ID to the client and handle redirection there
       // For example, window.location.href = session.url;
-     window.location.href = session.url;
-
-      console.log('Redirecting to checkout:', session.url);
+      window.location.href = session.url;
     } catch (error) {
       console.error('Error creating checkout session:', error.message);
     }
   };
-  
+
 
   return (
     <>
@@ -133,10 +156,17 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
 
           <div className='w-full flex flex-wrap justify-center'>
             <button
-              className='bg-black p-2 px-5 text-sm font-semibold text-white py-4 w-1/3 mb-12 rounded mt-8'
+              className='bg-black p-2 px-5 text-sm font-semibold text-white py-4 w-1/3 mb-12 rounded mt-8 relative'
               onClick={handlecheckout}
+              disabled={loading}
             >
-              Checkout € {getGrandTotalPrice() + shippingPrice}
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full border-t-2 border-gray-500 border-solid h-5 w-5"></div>
+                </div>
+              ) : (
+                <>Checkout € {getGrandTotalPrice() + shippingPrice}</>
+              )}
             </button>
           </div>
 
