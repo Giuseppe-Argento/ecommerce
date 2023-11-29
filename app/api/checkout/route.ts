@@ -5,7 +5,7 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
-export async function GET(res: Request) {
+export async function GET(res: Response, req: Request ) {
 
   if (req.method === 'POST') {
     try {
