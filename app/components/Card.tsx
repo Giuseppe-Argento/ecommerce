@@ -46,7 +46,7 @@ const Card: React.FC<CardProps> = ({ name, image, slug, stripe, stripePrice, pro
     return (
         <div className='card flex flex-col justify-between gap-4 relative'>
             <div className='productImage relative'>
-                <Image src={image} alt='product' fill={true} />
+                <Image src={image} alt='product card' fill={true} />
             </div>
             <p className='productTitle'>{name}</p>
             <p className='productTitle'>€ {price}</p>

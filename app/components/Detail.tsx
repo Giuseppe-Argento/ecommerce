@@ -25,7 +25,7 @@ const Deatils: React.FC<DeatilsProps> = ({ name, image, price, onClose }) => {
         <div className='flex flex-col gap-12 py-12'>
           <p className='text-xl font-semibold mb-4 text-center'>{name}</p>
           <p className='text-xl font-semibold mb-4 text-center'>€ {price}</p>
-          <Image className="m-auto" src={image} alt='product' width={400} height={600} />
+          <Image className="m-auto" src={image} alt='product detail' width={400} height={600} />
           <div className='flex flex-col justify-center items-center w-full gap-4'>
             <Link className='flex flex-wrap w-full' href='#'>
               <button

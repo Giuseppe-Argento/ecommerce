@@ -65,7 +65,7 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
               <>
                 {cart.map((item) => (
                   <div className='flex flex-wrap justify-between gap-4 items-center border-b-[1px] border-dotted border-black py-6'>
-                    <Image src={item.images[0]} height="90" width="65" />
+                    <Image src={item.images[0]} height="90" width="65" alt="cart image"/>
                     <p className='text-sm font-semibold w-1/3'>{item.name}</p>
                     <div className='flex flex-col items-center -mt-3'>
                       <p className='text-[8px]'>Price</p>
