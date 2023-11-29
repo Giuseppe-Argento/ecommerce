@@ -3,16 +3,20 @@
 // checkout.ts
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_51Gvs9lG8Eb6lvUjgp7ZqG8JUUUaEvaui0vLtZSmZSpDepqg5qAvuCCQQ2ZGJ585aOap6Q1qFI1hQzujb0ZqcgWZU00hjoaM10e');
 
 export const checkout = async (cart) => {
+
+
+
+  const stripePromise = loadStripe('pk_test_51Gvs9lG8Eb6lvUjgp7ZqG8JUUUaEvaui0vLtZSmZSpDepqg5qAvuCCQQ2ZGJ585aOap6Q1qFI1hQzujb0ZqcgWZU00hjoaM10e');
+
   try {
     const lineItems = cart.map((item) => ({
       price: item.id, 
       quantity: item.quantity,
     }));
 
-    const response = await fetch('https://stripe-97ev4apwd-giuseppe-argento.vercel.app/api/checkout', {
+    const response = await fetch('/api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
