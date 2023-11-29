@@ -41,9 +41,12 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
     return getTotalPrice() + shippingPrice;
   };
 
-  const handlecheckout = () => {
+  const handlecheckout = (event) => {
+    event.preventDefault(); // Prevent the default behavior of the event
     checkout(cart);
   };
+
+
   return (
     <>
 
