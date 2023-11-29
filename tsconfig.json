@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/redux/StoreProvider.ts", "app/redux/store.ts", "app/redux/cart.slice.ts", "app/layout.utsx", "app/api/stripe/sessions/route.js", "lib/checkout.js"],
   "exclude": ["node_modules"]
 }
