@@ -15,13 +15,22 @@ export async function POST(req: Request) {
       // Create a new checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
-        line_items: lineItems,
+        line_items: [
+          {
+            price: 'price_12345', // Replace with your actual price ID
+            quantity: 1,
+          },
+        ],
         mode: 'payment',
-        success_url: '#', // Redirect URL after successful payment
+        success_url: 'http://localhost:3000/success', // Redirect URL after successful payment
         cancel_url: 'http://localhost:3000/cancel', // Redirect URL after canceled payment
       });
 
-      res.redirect(303, session.url);
+      res.status(200).json({ id: session.id });
+
+
+      
+   
 
 
 }
