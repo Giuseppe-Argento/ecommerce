@@ -7,8 +7,6 @@ export async function GET() {
   try {
     const { data: prices } = await stripe.prices.list({
       expand: ['data.product'],
-    }, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     // Assuming Response is a global object or imported from somewhere

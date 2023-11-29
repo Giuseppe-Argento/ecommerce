@@ -64,7 +64,7 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
       // Redirect the user to the Stripe checkout page
       // You may want to send the session ID to the client and handle redirection there
       // For example, window.location.href = session.url;
-       window.location.href = session.url;
+     window.location.href = session.url;
 
       console.log('Redirecting to checkout:', session.url);
     } catch (error) {
