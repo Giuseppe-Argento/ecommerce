@@ -6,10 +6,9 @@ import Stripe from 'stripe';
 const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
 
-export async function POST() {
-  if (req.method === 'POST') {
+export async function POST(req: Request) {
 
-    try {
+ 
       
       const { lineItems } = req.body;
 
@@ -23,13 +22,6 @@ export async function POST() {
       });
 
       res.status(200).json({ id: session.id });
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-      res.status(500).json({ error: 'Error creating checkout session' });
-    }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end('Method Not Allowed');
-  }
+    
 }
 
