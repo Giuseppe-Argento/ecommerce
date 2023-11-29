@@ -6,7 +6,7 @@ import Stripe from 'stripe';
 const stripe = new Stripe('sk_test_51Gvs9lG8Eb6lvUjg4RzBs2fuVZPaHU1RQBbuGNq4F1gRhdzLRdFFAGEjrf2vboEMg866Hv392EXdzzcEkOlcaeyh00TymnI58x');
 
 // Define the handler function for the API endpoint
-export default async function Post(req: NextApiRequest, res: NextApiResponse) {
+export async function Post(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'POST') {
       const { lineItems } = req.body;
