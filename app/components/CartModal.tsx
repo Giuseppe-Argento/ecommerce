@@ -179,8 +179,7 @@ const CartModal: React.FC<DeatilsProps> = ({ title, image, price, onClose }) => 
         </div>
 
       </div>
-
-    </>
+</>
 
   );
 };
